@@ -1,0 +1,23 @@
+!CHECK the format file of the html (the header!!!)
+
+1) Create object to the wall:
+    -  wall name: upperWall, bootom, left, right
+    - x and y of the wall
+
+2) Create a rectangular: 
+    - has to be on the midle 
+    - responsive to the screen
+    - choose size of x,y : x = 20 rem, y = 10 rem 
+    - optional css: change the color of the wall whent the disk collide
+
+3) Create 4 Balls
+    - ball is an object with x and y, save the current wall 
+    - random the x or the y, depends
+    - save the current function
+    - save speed
+    - save the current x
+
+4) Movement:
+    - we have the x,y of the ball, rand the destination that is the x,y and make a function 
+     to determine each step 
+    - function to make each step of mouvement (that called inside setInterval)
