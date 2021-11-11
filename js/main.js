@@ -1,84 +1,152 @@
-
+//-----------------------------Canvas-----------------------------//
 let canvas = document.getElementById("myCanvas");
 let context = canvas.getContext("2d");
-
 context.fillStyle = "black";
-const balls_number = 4;
 
+//-----------------------------Global variables-----------------------------//
+const balls_number = 4;
+const ball_radius = 12;
+const max_speed_range = 4;
 let balls = [];
 
-const ball1 = new Ball(0, canvas.height / 2);  // left
-balls.push(ball1);
-const ball2 = new Ball(canvas.width  / 2, canvas.height);   // up
-balls.push(ball2);
-const ball3 = new Ball(canvas.width  / 2, 0);    // bottom
-balls.push(ball3);
-const ball4 = new Ball(canvas.width, canvas.height / 2);   // right
-balls.push(ball4);
+//-----------------------------Classes-----------------------------//
+function Ball(x, y, dx, dy){
+    this.x = x;
+    this.y = y;
+    this.delta_x = dx;
+    this.delta_y = dy;
+}
 
-const ballRadius = 20;
+//-----------------------------Main function-----------------------------//
+Main();
+
+function Main(){
+    initBalls();
+    for(let i = 0; i < balls.length; i++)
+        drawBall(balls[i]);
+}
+//-----------------------------functions-----------------------------//
+
+//initialize balls functions
+function initBalls(){
+    createBall(ball_radius,getRndIntegerForPosition(canvas.height-ball_radius,ball_radius),
+                getRndInteger(max_speed_range), getRndInteger(max_speed_range)); // left
+    createBall(getRndIntegerForPosition(canvas.width-ball_radius,ball_radius), canvas.height - ball_radius,
+                getRndInteger(max_speed_range), getRndInteger(max_speed_range)); // bottom
+    createBall(getRndIntegerForPosition(canvas.width-ball_radius,ball_radius), ball_radius,
+                getRndInteger(max_speed_range), getRndInteger(max_speed_range)); // up
+    createBall(canvas.width - ball_radius, getRndIntegerForPosition(canvas.height-ball_radius,ball_radius),
+                getRndInteger(max_speed_range), getRndInteger(max_speed_range)); // right
+}
+
+function createBall(x, y, dx, dy){
+    const res_ball = new Ball(x, y, dx, dy);
+    balls.push(res_ball);
+}
+
+
+//draw balls functions
+function draw(){
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    
+    // console.log(balls.length);
+    for(let i = 0; i < balls.length; i++){ 
+        drawBall(balls[i]);
+        moveBall(balls[i]);
+    }
+    
+}
 
 function drawBall(ball){
     context.beginPath();
-    context.arc(ball.x, ball.y, ballRadius, 0, Math.PI*2);
+    context.arc(ball.x, ball.y, ball_radius, 0, Math.PI*2);
     context.fillStyle = "yellow";
     context.fill();
     context.closePath();
 }
 
-function draw(){
-    context.clearRect(0, 0, canvas.width, canvas.height);
-
-    // console.log(balls.length);
-    for(let i = 0; i < balls.length; i++){
-        drawBall(balls[i]);
-        moveBall(balls[i]);
-    }
-
-}
 
 function moveBall(ball){
-    if(ball.x + ball.delta_x > canvas.width-ballRadius || ball.x + ball.delta_x < ballRadius) {
+    if(ball.x + ball.delta_x > canvas.width-ball_radius || ball.x + ball.delta_x < 0 + ball_radius) {
         ball.delta_x = -ball.delta_x;
     }
-    if(ball.y + ball.delta_y > canvas.height-ballRadius || ball.y + ball.delta_y < ballRadius) {
+    if(ball.y + ball.delta_y > canvas.height-ball_radius || ball.y + ball.delta_y < 0 + ball_radius) {
         ball.delta_y = -ball.delta_y;
     }
     
     ball.x += ball.delta_x;
     ball.y += ball.delta_y;
+
 }
 
+function checkBallCollision(){
+    for(let i = 0; i < balls.length; i++){
+        for(let j = i+1; j < balls.length; j++){
 
+            dx = balls[j].x - balls[i].x;
+            dy = balls[j].y - balls[i].y;
+            dist = Math.sqrt(dx*dx + dy*dy);
 
-function Ball(x, y){
-    this.x = x;
-    this.y = y;
-    this.delta_x = 20;
-    this.delta_y = -20;
+            if(dist < (ball_radius + ball_radius))
+            {
+                normal_x = dx / dist;
+                normal_y = dy / dist;
+                midpoint_x = (balls[i].x + balls[j].x)/2;
+                midpoint_y = (balls[i].y + balls[j].y)/2;
+
+                //do_somthing
+                rand_num = getRndInteger(1,0);
+
+                if(rand_num == 1)
+                    balls.splice(i,1);
+                else
+                    balls.splice(j,1);
+                
+            }
+        }
+    }
 }
 
-let intervalId;
+//random functions
+function getRndIntegerForPosition(max, min) {
+    return (Math.floor(Math.random() * (max - min)) + 10);
+  }
 
+  function getRndInteger(num) {
+    return (Math.floor(Math.random() * num) + 1);
+  }
+
+
+//-----------------------------Buttons handle-----------------------------//
+let interval_Id,interval_Id_2;
 const btn_start = document.querySelector("#btn_start");
 const btn_stop = document.querySelector("#btn_stop");
 
 function start(){
-    if(!intervalId){                  // enable to add more interval of the function
-        console.log("inside start function")
-        intervalId = setInterval(draw, 150);
+    if(!interval_Id && !interval_Id_2){      // enable to add more interval of the function
+
+        interval_Id = setInterval(draw, 10);
+        interval_Id_2 = setInterval(checkBallCollision, 10);
     }
 }
 
 function stop(){
-    clearInterval(intervalId);
-    intervalId = 0;
+    clearInterval(interval_Id);
+    clearInterval(interval_Id_2);
+    interval_Id = 0;
+    interval_Id_2 = 0;
+}
+
+function reset(){
+    balls = [];
+    initBalls();
+    const button = document.getElementById("btn_start");
+    button.click();
 }
 
 btn_start.addEventListener("click", start);
 btn_stop.addEventListener("click", stop);
-
-draw();
+btn_reset.addEventListener("click", reset);
 
 //   // declare variables
 //   const FPS = 30;
