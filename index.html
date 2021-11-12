@@ -6,17 +6,33 @@
 		<title>BallsGame</title>
         
         <link rel="stylesheet" type="text/css" href="css/main.css" />
+
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+		<!-- jQuery library -->
+		<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
+
+		<!-- Latest compiled JavaScript -->
+		<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
 	</head>
 	
 	
 	<body>
+        <div id="mainDiv">
+			<h1>Welcome to the BallsGame!</h1>
+			<br>
+			<canvas id="myCanvas" width="800rem" height="500rem">
+				Your browser does not support the HTML5 canvas tag.</canvas>
+		</div>
+	
+		<div id="buttonsDiv">
+			<button class="btn btn-primary" id='btn_start'>Start</button>
+			<button class="btn btn-primary" id='btn_stop'>Stop</button>
+			<button class="btn btn-primary" id='btn_reset'>Reset</button>
+			<label for="time">Timer</label>
+			<input type="number" id="time" name="time" min="1" value="60">
+		</div>
         
-		<h1>Welcome to the BallsGame!</h1>
-        <canvas id="myCanvas" width="800rem" height="500rem">
-            Your browser does not support the HTML5 canvas tag.</canvas>
-        <button id='btn_start'>Start</button>
-		<button id='btn_stop'>Stop</button>
-		<button id='btn_reset'>Reset</button>
 	
 		<script  src="js/main.js"></script>
 	</body>

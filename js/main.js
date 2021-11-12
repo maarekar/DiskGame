@@ -118,13 +118,14 @@ function getRndIntegerForPosition(max, min) {
 
 
 //-----------------------------Buttons handle-----------------------------//
-let interval_Id,interval_Id_2;
+let interval_Id,interval_Id_2, timer_interval;
+const default_timer = 60;
 const btn_start = document.querySelector("#btn_start");
 const btn_stop = document.querySelector("#btn_stop");
 
 function start(){
     if(!interval_Id && !interval_Id_2){      // enable to add more interval of the function
-
+        startTimer();
         interval_Id = setInterval(draw, 10);
         interval_Id_2 = setInterval(checkBallCollision, 10);
     }
@@ -133,6 +134,7 @@ function start(){
 function stop(){
     clearInterval(interval_Id);
     clearInterval(interval_Id_2);
+    clearInterval(timer_interval);
     interval_Id = 0;
     interval_Id_2 = 0;
 }
@@ -140,8 +142,30 @@ function stop(){
 function reset(){
     balls = [];
     initBalls();
-    const button = document.getElementById("btn_start");
-    button.click();
+    stop();
+    draw();
+    // const button = document.getElementById("btn_start");
+    // button.click();
+    document.getElementById("time").disabled = false;
+    document.getElementById("time").value = default_timer;
+}
+
+function startTimer(){
+    document.getElementById("time").disabled = true;
+    timer_interval = setInterval(decreaseTimer, 1000);
+
+}
+
+function decreaseTimer(){
+    let timer = document.getElementById("time");
+    timer.value = timer.value - 1;
+    if(timer.value == 0){
+        stopGame();
+    }
+}
+
+function stopGame(){
+    stop();
 }
 
 btn_start.addEventListener("click", start);
