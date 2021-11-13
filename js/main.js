@@ -8,6 +8,7 @@ const balls_number = 4;
 const ball_radius = 12;
 const max_speed_range = 4;
 let balls = [];
+let is_started = false;
 
 //-----------------------------Classes-----------------------------//
 function Ball(x, y, dx, dy){
@@ -48,11 +49,14 @@ function createBall(x, y, dx, dy){
 //draw balls functions
 function draw(){
     context.clearRect(0, 0, canvas.width, canvas.height);
-    
-    // console.log(balls.length);
+
     for(let i = 0; i < balls.length; i++){ 
         drawBall(balls[i]);
         moveBall(balls[i]);
+    }
+
+    if(balls.length == 1){
+        finishGame();
     }
     
 }
@@ -132,9 +136,7 @@ function start(){
 }
 
 function stop(){
-    clearInterval(interval_Id);
-    clearInterval(interval_Id_2);
-    clearInterval(timer_interval);
+    clearIntervals();
     interval_Id = 0;
     interval_Id_2 = 0;
 }
@@ -148,9 +150,11 @@ function reset(){
     // button.click();
     document.getElementById("time").disabled = false;
     document.getElementById("time").value = default_timer;
+    is_started = false;
 }
 
 function startTimer(){
+    is_started = true;
     document.getElementById("time").disabled = true;
     timer_interval = setInterval(decreaseTimer, 1000);
 
@@ -160,74 +164,36 @@ function decreaseTimer(){
     let timer = document.getElementById("time");
     timer.value = timer.value - 1;
     if(timer.value == 0){
-        stopGame();
+        finishGame();
     }
 }
 
-function stopGame(){
-    stop();
+function clearIntervals(){
+    clearInterval(interval_Id);
+    clearInterval(interval_Id_2);
+    clearInterval(timer_interval);
+}
+
+function finishGame(){
+    is_started = false;
+    clearIntervals();
+    // show finish message
 }
 
 btn_start.addEventListener("click", start);
 btn_stop.addEventListener("click", stop);
 btn_reset.addEventListener("click", reset);
 
-//   // declare variables
-//   const FPS = 30;
-//   var bs = 30;
-//   var bx, by;
-//   var xv, yv;
-//   var canvas, context;
-  
-//   // load canvas
-//   canvas = document.getElementById("myCanvas");
-//   context = canvas.getContext("2d");
+//-----------------------------Warning message-----------------------------//
+window.onbeforeunload = function () {  // WHY THE MESSAGE IS NOT COORECT ??????????
+    if (is_started) {
+      return "The game is not finished. Are you sure ?";
+    }
+}
 
-//   // set up interval (game loop)
-//   setInterval(update, 1000 / FPS);
-  
-//   // ball starting position
-//   bx = canvas.width / 2;
-//   by = canvas.height / 2;
-  
-//   // random ball starting speed (between 25 and 100 pps)
-//   xv = Math.floor(Math.random() * 76 + 25) / FPS;
-//   yv = Math.floor(Math.random() * 76 + 25) / FPS;
-  
-//   // random ball direction
-//   if (Math.floor(Math.random() * 2) == 0) {
-//       xv = -xv;
-//   }
-//   if (Math.floor(Math.random() * 2) == 0) {
-//       yv = -yv;
-//   }
-  
-//   // update function
-//   function update() {
-//       // move the ball
-//       bx += xv;
-//       by += yv;
-      
-//       // bounce the ball off each wall
-//       if (bx - bs / 2 < 0 && xv < 0) {
-//           xv = -xv;
-//       }
-//       if (bx + bs / 2 > canvas.width && xv > 0) {
-//           xv = -xv;
-//       }
-//       if (by - bs / 2 < 0 && yv < 0) {
-//           yv = -yv;
-//       }
-//       if (by + bs / 2 > canvas.height && yv > 0) {
-//           yv = -yv;
-//       }
-      
-//       // draw background and ball
-//       context.fillStyle = "black";
-//       context.fillRect(0, 0, canvas.width, canvas.height);
-//       context.fillStyle = "yellow";
-//       context.fillRect(bx - bs / 2, by - bs / 2, bs, bs);
-//   }
+
+
+
 
 
 
