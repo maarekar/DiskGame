@@ -142,6 +142,7 @@ function stop(){
 }
 
 function reset(){
+    clearSummary();
     balls = [];
     initBalls();
     stop();
@@ -178,6 +179,20 @@ function finishGame(){
     is_started = false;
     clearIntervals();
     // show finish message
+    let message;
+    if(balls.length > 1){
+        message = "The game finished before all the balls evaporated !";
+    }
+    else{
+        message = "The game finished before the times out !";
+    }
+    document.getElementById("summary").style.visibility = "visible";
+    document.getElementById("summaryText").textContent += message;
+}
+
+function clearSummary(){
+    document.getElementById("summary").style.visibility = "hidden";
+    document.getElementById("summaryText").textContent = "";
 }
 
 btn_start.addEventListener("click", start);
