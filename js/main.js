@@ -204,8 +204,7 @@ window.onbeforeunload = function () {  // WHY THE MESSAGE IS NOT COORECT ???????
     if (is_started) {
       return "The game is not finished. Are you sure ?";
     }
-}
-
+};
 
 
 
