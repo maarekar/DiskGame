@@ -1,47 +1,53 @@
 <!DOCTYPE html>
 <html>
 
-	<head>
-        <meta charset="UTF-8">
-		<title>BallsGame</title>
-        
-        <link rel="stylesheet" type="text/css" href="css/main.css" />
+<head>
+	<meta charset="UTF-8">
+	<title>DiskGame</title>
 
-		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-uWxY/CJNBR+1zjPWmfnSnVxwRheevXITnMqoEIeG1LJrdI0GlVs/9cVSyPYXdcSF" crossorigin="anonymous">
-		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-kQtW33rZJAHjgefvhyyzcGF3C5TFyBQBA13V1RKPf4uH+bwyzQxZ6CmMZHmNBEfJ" crossorigin="anonymous"></script>
-		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
-	</head>
-	
-	
-	<body>
-        <div id="mainDiv">
-			<h1>Welcome to the BallsGame!</h1>
-			<br>
-			<canvas id="myCanvas" width="800rem" height="500rem">
-				Your browser does not support the HTML5 canvas tag.
-			</canvas>
-			<br>
-			<div id="summary">
-				<h1>Game over !</h1>
-				<br>
-				<p id="summaryText"></p>
-			</div>
+	<link rel="stylesheet" type="text/css" href="css/main.css" />
+	<link href='https://fonts.googleapis.com/css?family=Bangers' rel='stylesheet'>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-uWxY/CJNBR+1zjPWmfnSnVxwRheevXITnMqoEIeG1LJrdI0GlVs/9cVSyPYXdcSF" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-kQtW33rZJAHjgefvhyyzcGF3C5TFyBQBA13V1RKPf4uH+bwyzQxZ6CmMZHmNBEfJ"
+		crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+		integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+</head>
 
-		</div>
-		
-		<div id="buttonsDiv">
+
+<body>
+	<div class="video-container">
+		<video src="video.mp4" muted loop autoplay></video>
+	</div>
+
+	<div id="mainDiv">
+		<h1>Welcome to:<br>the Disk Game!</h1>
+		<br>
+		<canvas id="myCanvas" width="800rem" height="500rem">
+			Your browser does not support the HTML5 canvas tag.
+		</canvas>
+		<div id="timerDiv">
 			<label for="time"><i class="fas fa-clock"></i> Timer</label>
 			<input type="number" id="time" name="time" min="1" value="60">
 			<br>
+		</div>
+
+		<div id="buttonsDiv">
 			<br>
 			<button class="btn btn-primary" id='btn_start'>Start</button>
 			<button class="btn btn-primary" id='btn_stop'>Stop</button>
 			<button class="btn btn-primary" id='btn_reset'>Reset</button>
-			
 		</div>
-        
-	
-		<script  src="js/main.js"></script>
-	</body>
+
+		<div id="summary">
+			<h1>Game over !</h1>
+			<div id="summaryText"></div>
+		</div>
+
+	</div>
+	<script src="js/main.js"></script>
+</body>
 
 </html>

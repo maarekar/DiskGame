@@ -1,21 +1,23 @@
 //-----------------------------Canvas-----------------------------//
 let canvas = document.getElementById("myCanvas");
 let context = canvas.getContext("2d");
-context.fillStyle = "black";
+context.fillStyle = "white";
 
 //-----------------------------Global variables-----------------------------//
 const balls_number = 4;
-const ball_radius = 12;
+const ball_radius = 15;
 const max_speed_range = 4;
 let balls = [];
 let is_started = false;
+let colors_red_white = ["red", "white"];
 
 //-----------------------------Classes-----------------------------//
-function Ball(x, y, dx, dy){
+function Ball(x, y, dx, dy, kills){
     this.x = x;
     this.y = y;
     this.delta_x = dx;
     this.delta_y = dy;
+    this.kills = kills;
 }
 
 //-----------------------------Main function-----------------------------//
@@ -41,7 +43,7 @@ function initBalls(){
 }
 
 function createBall(x, y, dx, dy){
-    const res_ball = new Ball(x, y, dx, dy);
+    const res_ball = new Ball(x, y, dx, dy, 0);
     balls.push(res_ball);
 }
 
@@ -62,9 +64,39 @@ function draw(){
 }
 
 function drawBall(ball){
+    const rand_color1 = colors_red_white[Math.floor(Math.random()*colors_red_white.length)];
+    const rand_color2 = colors_red_white[Math.floor(Math.random()*colors_red_white.length)];
+    drawBallHelper(ball, "black", ball_radius);
+
+    if(ball.kills == 0)
+    {
+        drawBallHelper(ball, "white", ball_radius/1.5);
+        drawBallHelper(ball, "black", ball_radius/2.5);
+        drawBallHelper(ball, "red", ball_radius/6);
+    }
+    else if(ball.kills == 1)
+    {
+        drawBallHelper(ball, "cyan", ball_radius/1.5);
+        drawBallHelper(ball, "white", ball_radius/2.5);
+        drawBallHelper(ball, "blue", ball_radius/6);
+    }
+    else if(ball.kills == 2)
+    {
+        drawBallHelper(ball, rand_color1, ball_radius/1.5);
+        drawBallHelper(ball, "purple", ball_radius/2.5);
+        drawBallHelper(ball, rand_color2, ball_radius/6);
+    }
+    else
+    {
+        drawBallHelper(ball, "green", ball_radius/1.5);
+    }
+}
+
+function drawBallHelper(ball, color, radius)
+{
     context.beginPath();
-    context.arc(ball.x, ball.y, ball_radius, 0, Math.PI*2);
-    context.fillStyle = "yellow";
+    context.arc(ball.x, ball.y, radius, 0, Math.PI*2);
+    context.fillStyle = color;
     context.fill();
     context.closePath();
 }
@@ -102,9 +134,15 @@ function checkBallCollision(){
                 rand_num = getRndInteger(1,0);
 
                 if(rand_num == 1)
+                {
+                    balls[j].kills += 1;
                     balls.splice(i,1);
+                }
                 else
+                {
+                    balls[i].kills += 1;
                     balls.splice(j,1);
+                }
                 
             }
         }
