@@ -33,39 +33,42 @@ h1 {
 
 #mainDiv{
     position: fixed;
-    top: 40%;
+    top: 45%;
     left: 50%;
-    -webkit-transform: translate(-50%, -50%);
+    /* -webkit-transform: translate(-50%, -50%); */
     transform: translate(-50%, -50%);
-    justify-content: space-between;
+    /* justify-content: space-between;
     align-items: center;
     transition: 0.5s;
-    z-index: 2;
-}
-
-#buttonsDiv{
-    position: fixed;
-    top: 95%;
-    left: 12%;
-    transform: translate(-50%, -50%);
+    z-index: 2; */
+    /* margin-top: 16%; */
 }
 
 #timerDiv{
     position: fixed;
-    top: 90%;
+    margin-top: 3%;
+    /* top: 90%; */
     left: 16%;
-    font-size: 16px;
+    /* font-size: 16px; */
     transform: translate(-50%, -50%);
 }
 
-#summary{
-    visibility: visible;
-    margin-left: 40%;
+#buttonsDiv{
+    position: fixed;
+    padding-top: 15%;
+    /* top: 95%; */
+    left: 12%;
+    transform: translate(-50%, -50%);
 }
 
 
+#summary{
+    visibility: hidden;
+    margin-left: 40%;
+}
+
 #summaryText{
-    display: inline-block;
+    /* display: inline-block; */
     font-family: 'Bangers';
     font-size: 1.6em;
 }
