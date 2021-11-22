@@ -1,3 +1,4 @@
+
 h1 {
     text-align: center;
     font-family: 'Bangers';
@@ -8,7 +9,6 @@ h1 {
 
 #myCanvas{
     background-color: rgb(255, 255, 255);
-    border-color: yellow;
     border-width: thin;
 }
 
@@ -32,6 +32,7 @@ h1 {
 }
 
 #mainDiv{
+    vertical-align:top;
     position: fixed;
     top: 45%;
     left: 50%;
@@ -42,33 +43,33 @@ h1 {
     transition: 0.5s;
     z-index: 2; */
     /* margin-top: 16%; */
+
+    text-align:center;
 }
 
 #timerDiv{
-    position: fixed;
+    position: fixed; 
     margin-top: 3%;
     /* top: 90%; */
-    left: 16%;
-    /* font-size: 16px; */
+    margin-left: 22%;
+    font-size: 16px;
     transform: translate(-50%, -50%);
 }
 
 #buttonsDiv{
     position: fixed;
-    padding-top: 15%;
-    /* top: 95%; */
-    left: 12%;
+    left: 19%;
     transform: translate(-50%, -50%);
+    margin-top:7%;
 }
-
 
 #summary{
+    vertical-align:top;
     visibility: hidden;
     margin-left: 40%;
-}
+    display: inline-block;}
 
 #summaryText{
-    /* display: inline-block; */
     font-family: 'Bangers';
     font-size: 1.6em;
 }
