@@ -1,10 +1,5 @@
-# BallsGame
+23/11/2021
+Exercice 1 in JS Course
+Arnaud Maarek, 342615879, arnaudmaarek@hotmail.com
+Shai Levi, 204124234, shailevi23@gmail.com
 
-It should contain the following:
-• Date
-• Name of the exercise (“E.g. Exercise 1 in JS Course”)
-• Details about submitters:
-• Full Name
-• ID Number
-• Email address
-• It might also contain special instructions or comments
