@@ -36,21 +36,13 @@ h1 {
     position: fixed;
     top: 45%;
     left: 50%;
-    /* -webkit-transform: translate(-50%, -50%); */
     transform: translate(-50%, -50%);
-    /* justify-content: space-between;
-    align-items: center;
-    transition: 0.5s;
-    z-index: 2; */
-    /* margin-top: 16%; */
-
     text-align:center;
 }
 
 #timerDiv{
     position: fixed; 
     margin-top: 3%;
-    /* top: 90%; */
     margin-left: 22%;
     font-size: 16px;
     transform: translate(-50%, -50%);
