@@ -187,11 +187,11 @@ function reset(){
     draw();
     document.getElementById("time").disabled = false;
     document.getElementById("time").value = g_state.default_timer;
-    g_stateis_started = false;
+    g_state.is_started = false;
 }
 
 function startTimer(){
-    g_stateis_started = true;
+    g_state.is_started = true;
     document.getElementById("time").disabled = true;
     g_state.timer_interval = setInterval(decreaseTimer, 1000);
 
@@ -212,7 +212,7 @@ function clearIntervals(){
 }
 
 function finishGame(){
-    g_stateis_started = false;
+    g_state.is_started = false;
     clearIntervals();
     let message;
 
@@ -237,10 +237,23 @@ g_state.btn_stop.addEventListener("click", stop);
 g_state.btn_reset.addEventListener("click", reset);
 
 //-----------------------------Warning message-----------------------------//
-window.onbeforeunload = function () {  // WHY THE MESSAGE IS NOT COORECT ??????????
-    if (g_state.is_started) {
-      return "The game is not finished. Are you sure ?";
-    }
+// window.onbeforeunload = function () {  // WHY THE MESSAGE IS NOT COORECT ??????????
+//     if (g_state.is_started) {
+//       return "The game is not finished. Are you sure ?";
+//     }
+// };
+
+window.onload = function() {
+    window.addEventListener("beforeunload", function (e) {
+        if (!g_state.is_started) {
+            return undefined;
+        }
+        
+        var confirmationMessage = "The game is not finished. Are you sure ?";
+
+        (e || window.event).returnValue = confirmationMessage; //Gecko + IE
+        return confirmationMessage; //Gecko + Webkit, Safari, Chrome etc.
+    });
 };
 
 
